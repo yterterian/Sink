@@ -55,10 +55,21 @@ export default eventHandler(async (event) => {
     })
   }
 
+  if (existingLink.locked) {
+    await denyLinkChange(event, {
+      slug: existingLink.slug,
+      linkId: existingLink.id,
+      status: 423,
+      reason: 'Link is locked. Unlock it before editing.',
+      changes: diffLinkForAudit(existingLink, mergeEditableLink(existingLink, link)),
+    })
+  }
+
   if (link.url !== existingLink.url)
     await detectUnsafeLink(event, link)
 
   const newLink = mergeEditableLink(existingLink, link)
+  await assertAllowedDestinations(event, newLink, existingLink)
   await applyEditableLinkPassword(newLink, link.password)
 
   if (!await updateLink(event, newLink, { id: existingLink.id, updatedAt: existingLink.updatedAt })) {
@@ -67,6 +78,12 @@ export default eventHandler(async (event) => {
       statusText: 'Link was modified or replaced',
     })
   }
+  await recordLinkAudit(event, {
+    action: 'edit',
+    slug: newLink.slug,
+    linkId: newLink.id,
+    changes: diffLinkForAudit(existingLink, newLink),
+  })
   setResponseStatus(event, 201)
   return buildLinkResponse(event, newLink)
 })

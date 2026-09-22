@@ -1,5 +1,6 @@
 export * from '#shared/types/auth'
 export * from '#shared/types/events'
 export * from '#shared/types/link'
+export * from '#shared/types/link-audit'
 export * from '#shared/types/link-check'
 export * from '#shared/types/metrics'

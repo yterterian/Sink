@@ -129,6 +129,17 @@
         "title": "Xóa {slug}?",
         "description": "Liên kết sẽ bị xóa vĩnh viễn và không thể hoàn tác.",
         "action": "Xóa liên kết"
+      },
+      "lock": {
+        "title": "Khóa {slug}?",
+        "description": "Liên kết đã khóa không thể chỉnh sửa hoặc xóa, và URL rút gọn của nó không thể dùng lại. Hãy khóa các liên kết đã in thành mã QR.",
+        "action": "Khóa liên kết"
+      },
+      "unlock": {
+        "title": "Mở khóa {slug}?",
+        "description": "Bất kỳ ai có thể đăng nhập đều có thể thay đổi đích của liên kết này. Mọi mã QR đã in sẽ đi theo thay đổi đó.",
+        "confirm_label": "Nhập {slug} để xác nhận",
+        "action": "Mở khóa liên kết"
       }
     },
     "sort": {
@@ -141,6 +152,33 @@
     "create_failed": "Tạo liên kết thất bại",
     "ai_slug_failed": "Tạo slug AI thất bại",
     "ai_og_failed": "Không thể tạo AI OpenGraph",
-    "ai_og_success": "Tạo AI OpenGraph thành công"
+    "ai_og_success": "Tạo AI OpenGraph thành công",
+    "locked": "Đã khóa",
+    "locked_hint": "Mở khóa liên kết để chỉnh sửa hoặc xóa",
+    "lock": {
+      "lock": "Khóa liên kết",
+      "unlock": "Mở khóa liên kết",
+      "lock_success": "Đã khóa liên kết",
+      "unlock_success": "Đã mở khóa liên kết",
+      "failed": "Không thể thay đổi trạng thái khóa"
+    },
+    "history": {
+      "open": "Lịch sử thay đổi",
+      "title": "Lịch sử thay đổi của {slug}",
+      "empty": "Chưa có thay đổi nào được ghi lại. Các thay đổi trước khi bật lịch sử sẽ không hiển thị.",
+      "load_failed": "Không thể tải lịch sử thay đổi",
+      "load_more": "Tải thêm",
+      "by": "bởi {actor}",
+      "no_field_changes": "Không có trường nào thay đổi",
+      "actions": {
+        "create": "Đã tạo",
+        "edit": "Đã sửa",
+        "delete": "Đã xóa",
+        "lock": "Đã khóa",
+        "unlock": "Đã mở khóa",
+        "import": "Đã nhập",
+        "denied": "Thay đổi bị chặn"
+      }
+    }
   }
 }

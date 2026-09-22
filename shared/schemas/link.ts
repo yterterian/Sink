@@ -58,6 +58,7 @@ const LinkFieldsSchema = z.object({
   unsafe: z.boolean().optional(),
   geo: GeoSchema.optional(),
   tags: TagsSchema,
+  locked: z.boolean().optional(),
 })
 
 export const CreateLinkSchema = LinkFieldsSchema.extend({
@@ -67,7 +68,8 @@ export const CreateLinkSchema = LinkFieldsSchema.extend({
   updatedAt: TimestampSchema.default(() => Math.floor(Date.now() / 1000)),
 })
 
-export const EditLinkSchema = LinkFieldsSchema.extend({
+// The lock state can only change through /api/link/lock, never through a normal edit.
+export const EditLinkSchema = LinkFieldsSchema.omit({ locked: true }).extend({
   password: EditLinkPasswordSchema,
 })
 

@@ -104,6 +104,7 @@ function rowToLink(row: LinkRow): Link {
     'password',
     'unsafe',
     'geo',
+    'locked',
   ] as const
 
   for (const field of optionalFields) {
@@ -153,6 +154,7 @@ export function buildD1LinkValues(event: H3Event, link: Link, effectiveExpiresAt
     password: link.password ?? null,
     unsafe: link.unsafe ?? null,
     geo: link.geo ?? null,
+    locked: link.locked ?? null,
     normalizedUrl: withoutQuery(link.url),
     effectiveExpiresAt: effectiveExpiresAt === undefined ? getExpiration(event, link.expiration) ?? null : effectiveExpiresAt,
   }
@@ -221,7 +223,12 @@ function buildCreateLinkStatements(event: H3Event, db: ReturnType<typeof getData
   const insert = db.insert(links).values(pendingValues).onConflictDoUpdate({
     target: links.slug,
     set: pendingValues,
-    setWhere: and(isNotNull(links.effectiveExpiresAt), lte(links.effectiveExpiresAt, now)),
+    // An expired slug may be reused, but never one that is locked: printed QR codes keep pointing at it.
+    setWhere: and(
+      isNotNull(links.effectiveExpiresAt),
+      lte(links.effectiveExpiresAt, now),
+      or(isNull(links.locked), eq(links.locked, false)),
+    ),
   }).returning({ slug: links.slug })
   const clearTombstone = db.delete(linkTombstones).where(and(
     eq(linkTombstones.slug, link.slug),

@@ -37,5 +37,22 @@ export default eventHandler(async (event) => {
 
   const body = await readValidatedBody(event, DeleteSchema.parse)
   const slug = normalizeSlug(event, body.slug)
+  const existingLink = await getAnyAuthoritativeLink(event, slug)
+  if (existingLink?.locked) {
+    await denyLinkChange(event, {
+      slug,
+      linkId: existingLink.id,
+      status: 423,
+      reason: 'Link is locked. Unlock it before deleting.',
+      changes: [{ field: 'deleted', to: true }],
+    })
+  }
+
   await deleteLink(event, slug)
+  await recordLinkAudit(event, {
+    action: 'delete',
+    slug,
+    linkId: existingLink?.id,
+    changes: existingLink ? diffLinkForAudit(existingLink, null) : [],
+  })
 })

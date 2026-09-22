@@ -129,6 +129,17 @@
         "title": "Eliminar {slug}?",
         "description": "O link será eliminado permanentemente. Esta ação não pode ser anulada.",
         "action": "Eliminar link"
+      },
+      "lock": {
+        "title": "Bloquear {slug}?",
+        "description": "Um link bloqueado não pode ser editado nem eliminado, e o respetivo URL curto não pode ser reutilizado. Bloqueie os links impressos como códigos QR.",
+        "action": "Bloquear link"
+      },
+      "unlock": {
+        "title": "Desbloquear {slug}?",
+        "description": "Qualquer pessoa que consiga iniciar sessão poderá alterar o destino deste link. Todos os códigos QR já impressos seguirão a alteração.",
+        "confirm_label": "Escreva {slug} para confirmar",
+        "action": "Desbloquear link"
       }
     },
     "sort": {
@@ -141,6 +152,33 @@
     "create_failed": "Falha ao criar link",
     "ai_slug_failed": "Falha ao gerar slug via IA",
     "ai_og_failed": "Falha ao gerar OpenGraph da IA",
-    "ai_og_success": "OpenGraph da IA gerado com sucesso"
+    "ai_og_success": "OpenGraph da IA gerado com sucesso",
+    "locked": "Bloqueado",
+    "locked_hint": "Desbloqueie a ligação para a editar ou eliminar",
+    "lock": {
+      "lock": "Bloquear link",
+      "unlock": "Desbloquear link",
+      "lock_success": "Link bloqueado",
+      "unlock_success": "Link desbloqueado",
+      "failed": "Não foi possível alterar o bloqueio"
+    },
+    "history": {
+      "open": "Histórico de alterações",
+      "title": "Histórico de alterações de {slug}",
+      "empty": "Ainda não há alterações registadas. As alterações anteriores à ativação do histórico não são apresentadas.",
+      "load_failed": "Não foi possível carregar o histórico de alterações",
+      "load_more": "Carregar mais",
+      "by": "por {actor}",
+      "no_field_changes": "Nenhum campo alterado",
+      "actions": {
+        "create": "Criado",
+        "edit": "Editado",
+        "delete": "Eliminado",
+        "lock": "Bloqueado",
+        "unlock": "Desbloqueado",
+        "import": "Importado",
+        "denied": "Alteração bloqueada"
+      }
+    }
   }
 }

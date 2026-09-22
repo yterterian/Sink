@@ -129,6 +129,17 @@
         "title": "Hapus {slug}?",
         "description": "Tautan akan dihapus permanen dan tidak dapat dipulihkan.",
         "action": "Hapus tautan"
+      },
+      "lock": {
+        "title": "Kunci {slug}?",
+        "description": "Tautan yang terkunci tidak dapat diedit atau dihapus, dan URL pendeknya tidak dapat digunakan ulang. Kunci tautan yang dicetak sebagai kode QR.",
+        "action": "Kunci tautan"
+      },
+      "unlock": {
+        "title": "Buka kunci {slug}?",
+        "description": "Siapa pun yang dapat masuk akan bisa mengubah tujuan tautan ini. Semua kode QR yang sudah dicetak akan mengikuti perubahan tersebut.",
+        "confirm_label": "Ketik {slug} untuk mengonfirmasi",
+        "action": "Buka kunci tautan"
       }
     },
     "sort": {
@@ -141,6 +152,33 @@
     "create_failed": "Gagal membuat tautan",
     "ai_slug_failed": "Gagal membuat slug AI",
     "ai_og_failed": "Gagal membuat OpenGraph AI",
-    "ai_og_success": "OpenGraph AI berhasil dibuat"
+    "ai_og_success": "OpenGraph AI berhasil dibuat",
+    "locked": "Terkunci",
+    "locked_hint": "Buka kunci tautan ini untuk mengedit atau menghapusnya",
+    "lock": {
+      "lock": "Kunci tautan",
+      "unlock": "Buka kunci tautan",
+      "lock_success": "Tautan dikunci",
+      "unlock_success": "Kunci tautan dibuka",
+      "failed": "Gagal mengubah kunci"
+    },
+    "history": {
+      "open": "Riwayat perubahan",
+      "title": "Riwayat perubahan {slug}",
+      "empty": "Belum ada perubahan yang tercatat. Perubahan sebelum riwayat diaktifkan tidak ditampilkan.",
+      "load_failed": "Gagal memuat riwayat perubahan",
+      "load_more": "Muat lebih banyak",
+      "by": "oleh {actor}",
+      "no_field_changes": "Tidak ada perubahan kolom",
+      "actions": {
+        "create": "Dibuat",
+        "edit": "Diedit",
+        "delete": "Dihapus",
+        "lock": "Dikunci",
+        "unlock": "Kunci dibuka",
+        "import": "Diimpor",
+        "denied": "Perubahan diblokir"
+      }
+    }
   }
 }

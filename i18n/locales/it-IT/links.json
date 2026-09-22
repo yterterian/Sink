@@ -129,6 +129,17 @@
         "title": "Eliminare {slug}?",
         "description": "Il link verrà eliminato definitivamente. L’azione non può essere annullata.",
         "action": "Elimina link"
+      },
+      "lock": {
+        "title": "Bloccare {slug}?",
+        "description": "Un link bloccato non può essere modificato né eliminato e il suo URL breve non può essere riutilizzato. Blocca i link stampati come codici QR.",
+        "action": "Blocca link"
+      },
+      "unlock": {
+        "title": "Sbloccare {slug}?",
+        "description": "Chiunque possa accedere potrà cambiare la destinazione di questo link. Tutti i codici QR già stampati seguiranno la modifica.",
+        "confirm_label": "Digita {slug} per confermare",
+        "action": "Sblocca link"
       }
     },
     "sort": {
@@ -141,6 +152,33 @@
     "create_failed": "Creazione link fallita",
     "ai_slug_failed": "Generazione slug IA fallita",
     "ai_og_failed": "Impossibile generare l'OpenGraph AI",
-    "ai_og_success": "OpenGraph AI generato con successo"
+    "ai_og_success": "OpenGraph AI generato con successo",
+    "locked": "Bloccato",
+    "locked_hint": "Sblocca il link per modificarlo o eliminarlo",
+    "lock": {
+      "lock": "Blocca link",
+      "unlock": "Sblocca link",
+      "lock_success": "Link bloccato",
+      "unlock_success": "Link sbloccato",
+      "failed": "Impossibile modificare il blocco"
+    },
+    "history": {
+      "open": "Cronologia modifiche",
+      "title": "Cronologia modifiche di {slug}",
+      "empty": "Nessuna modifica registrata. Le modifiche precedenti all’attivazione della cronologia non vengono mostrate.",
+      "load_failed": "Impossibile caricare la cronologia modifiche",
+      "load_more": "Carica altri",
+      "by": "da {actor}",
+      "no_field_changes": "Nessun campo modificato",
+      "actions": {
+        "create": "Creato",
+        "edit": "Modificato",
+        "delete": "Eliminato",
+        "lock": "Bloccato",
+        "unlock": "Sbloccato",
+        "import": "Importato",
+        "denied": "Modifica bloccata"
+      }
+    }
   }
 }

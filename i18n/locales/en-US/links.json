@@ -129,6 +129,17 @@
         "title": "Delete {slug}?",
         "description": "This permanently deletes the link and cannot be undone.",
         "action": "Delete link"
+      },
+      "lock": {
+        "title": "Lock {slug}?",
+        "description": "A locked link can't be edited or deleted, and its short URL can't be reused. Lock links that are printed as QR codes.",
+        "action": "Lock link"
+      },
+      "unlock": {
+        "title": "Unlock {slug}?",
+        "description": "Anyone who can sign in will be able to change where this link goes. Every QR code already printed for it will follow the change.",
+        "confirm_label": "Type {slug} to confirm",
+        "action": "Unlock link"
       }
     },
     "sort": {
@@ -141,6 +152,33 @@
     "create_failed": "Failed to create link",
     "ai_slug_failed": "Failed to generate AI slug",
     "ai_og_failed": "Failed to generate AI OpenGraph",
-    "ai_og_success": "AI OpenGraph generated successfully"
+    "ai_og_success": "AI OpenGraph generated successfully",
+    "locked": "Locked",
+    "locked_hint": "Unlock this link to edit or delete it",
+    "lock": {
+      "lock": "Lock link",
+      "unlock": "Unlock link",
+      "lock_success": "Link locked",
+      "unlock_success": "Link unlocked",
+      "failed": "Couldn't change the lock"
+    },
+    "history": {
+      "open": "Change history",
+      "title": "Change history for {slug}",
+      "empty": "No changes recorded yet. Changes made before history was turned on aren't shown.",
+      "load_failed": "Couldn't load the change history",
+      "load_more": "Load more",
+      "by": "by {actor}",
+      "no_field_changes": "No field changes",
+      "actions": {
+        "create": "Created",
+        "edit": "Edited",
+        "delete": "Deleted",
+        "lock": "Locked",
+        "unlock": "Unlocked",
+        "import": "Imported",
+        "denied": "Change blocked"
+      }
+    }
   }
 }

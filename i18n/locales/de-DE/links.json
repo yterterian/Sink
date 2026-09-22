@@ -129,6 +129,17 @@
         "title": "{slug} löschen?",
         "description": "Der Link wird dauerhaft gelöscht. Dies kann nicht rückgängig gemacht werden.",
         "action": "Link löschen"
+      },
+      "lock": {
+        "title": "{slug} sperren?",
+        "description": "Ein gesperrter Link kann weder bearbeitet noch gelöscht werden, und seine Kurz-URL kann nicht wiederverwendet werden. Links sperren, die als QR-Code gedruckt sind.",
+        "action": "Link sperren"
+      },
+      "unlock": {
+        "title": "{slug} entsperren?",
+        "description": "Danach kann jede angemeldete Person das Ziel dieses Links ändern. Alle bereits gedruckten QR-Codes folgen dieser Änderung.",
+        "confirm_label": "{slug} zur Bestätigung eingeben",
+        "action": "Link entsperren"
       }
     },
     "sort": {
@@ -141,6 +152,33 @@
     "create_failed": "Link konnte nicht erstellt werden",
     "ai_slug_failed": "KI-Slug konnte nicht generiert werden",
     "ai_og_failed": "Fehler beim Generieren des KI-OpenGraph",
-    "ai_og_success": "KI-OpenGraph erfolgreich generiert"
+    "ai_og_success": "KI-OpenGraph erfolgreich generiert",
+    "locked": "Gesperrt",
+    "locked_hint": "Zum Bearbeiten oder Löschen den Link entsperren",
+    "lock": {
+      "lock": "Link sperren",
+      "unlock": "Link entsperren",
+      "lock_success": "Link gesperrt",
+      "unlock_success": "Link entsperrt",
+      "failed": "Sperre konnte nicht geändert werden"
+    },
+    "history": {
+      "open": "Änderungsverlauf",
+      "title": "Änderungsverlauf für {slug}",
+      "empty": "Noch keine Änderungen erfasst. Änderungen vor der Aktivierung des Verlaufs werden nicht angezeigt.",
+      "load_failed": "Änderungsverlauf konnte nicht geladen werden",
+      "load_more": "Mehr laden",
+      "by": "von {actor}",
+      "no_field_changes": "Keine Feldänderungen",
+      "actions": {
+        "create": "Erstellt",
+        "edit": "Bearbeitet",
+        "delete": "Gelöscht",
+        "lock": "Gesperrt",
+        "unlock": "Entsperrt",
+        "import": "Importiert",
+        "denied": "Änderung blockiert"
+      }
+    }
   }
 }

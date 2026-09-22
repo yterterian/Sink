@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { ComponentPublicInstance } from 'vue'
 import type { DashboardLink } from '@/types/dashboard-links'
-import { CalendarPlus2, Copy, CopyCheck, Ellipsis, Eraser, Flame, Hourglass, Link as LinkIcon, MousePointerClick, QrCode, ShieldAlert, SquarePen, Users } from '@lucide/vue'
+import { CalendarPlus2, Copy, CopyCheck, Ellipsis, Eraser, Flame, History, Hourglass, Link as LinkIcon, Lock, LockOpen, MousePointerClick, QrCode, ShieldAlert, SquarePen, Users } from '@lucide/vue'
 import { useClipboard, useMediaQuery } from '@vueuse/core'
 import { parseURL } from 'ufo'
 import { toast } from 'vue-sonner'
@@ -15,6 +15,9 @@ const editPopoverOpen = shallowRef(false)
 const qrDialogOpen = shallowRef(false)
 const editDialogOpen = shallowRef(false)
 const deleteDialogOpen = shallowRef(false)
+const lockDialogOpen = shallowRef(false)
+const historyDialogOpen = shallowRef(false)
+const isLocked = computed(() => Boolean(props.link.locked))
 const actionsTriggerRef = useTemplateRef<ComponentPublicInstance>('actionsTrigger')
 const isDesktop = useMediaQuery('(min-width: 640px)')
 
@@ -36,8 +39,20 @@ async function openDeleteDialog() {
   deleteDialogOpen.value = true
 }
 
+async function openLockDialog() {
+  editPopoverOpen.value = false
+  await nextTick()
+  lockDialogOpen.value = true
+}
+
+async function openHistoryDialog() {
+  editPopoverOpen.value = false
+  await nextTick()
+  historyDialogOpen.value = true
+}
+
 function handlePopoverCloseAutoFocus(event: Event) {
-  if (qrDialogOpen.value || editDialogOpen.value || deleteDialogOpen.value)
+  if (qrDialogOpen.value || editDialogOpen.value || deleteDialogOpen.value || lockDialogOpen.value || historyDialogOpen.value)
     event.preventDefault()
 }
 
@@ -170,6 +185,15 @@ function copyLink() {
                 >{{ host }}/{{ link.slug }}</span>
               </NuxtLink>
               <span
+                v-if="isLocked"
+                role="img"
+                :aria-label="$t('links.locked')"
+                :title="$t('links.locked')"
+                class="ml-1 inline-flex shrink-0 text-muted-foreground"
+              >
+                <Lock aria-hidden="true" class="size-4" />
+              </span>
+              <span
                 v-if="link.unsafe"
                 role="img"
                 :aria-label="$t('links.unsafe')"
@@ -263,17 +287,41 @@ function copyLink() {
                 {{ $t('links.download_qr_code') }}
               </DropdownMenuItem>
 
+              <DropdownMenuLabel
+                v-if="isLocked"
+                class="max-w-56 text-xs font-normal text-muted-foreground"
+              >
+                {{ $t('links.locked_hint') }}
+              </DropdownMenuLabel>
+
               <DropdownMenuItem
+                :disabled="isLocked"
                 @select.prevent="openEditDialog"
               >
                 <SquarePen aria-hidden="true" />
                 {{ $t('common.edit') }}
               </DropdownMenuItem>
 
+              <DropdownMenuItem
+                @select.prevent="openLockDialog"
+              >
+                <LockOpen v-if="isLocked" aria-hidden="true" />
+                <Lock v-else aria-hidden="true" />
+                {{ isLocked ? $t('links.lock.unlock') : $t('links.lock.lock') }}
+              </DropdownMenuItem>
+
+              <DropdownMenuItem
+                @select.prevent="openHistoryDialog"
+              >
+                <History aria-hidden="true" />
+                {{ $t('links.history.open') }}
+              </DropdownMenuItem>
+
               <DropdownMenuSeparator />
 
               <DropdownMenuItem
                 variant="destructive"
+                :disabled="isLocked"
                 @select.prevent="openDeleteDialog"
               >
                 <Eraser aria-hidden="true" />
@@ -417,6 +465,16 @@ function copyLink() {
     <DashboardLinksDelete
       v-model:open="deleteDialogOpen"
       :link="link"
+      @close-auto-focus="handleDialogCloseAutoFocus"
+    />
+    <DashboardLinksLockDialog
+      v-model:open="lockDialogOpen"
+      :link="link"
+      @close-auto-focus="handleDialogCloseAutoFocus"
+    />
+    <DashboardLinksHistoryDialog
+      v-model:open="historyDialogOpen"
+      :slug="link.slug"
       @close-auto-focus="handleDialogCloseAutoFocus"
     />
   </Card>

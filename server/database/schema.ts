@@ -1,6 +1,8 @@
 import type { Link } from '../../shared/schemas/link'
+import type { LinkAuditChange } from '../../shared/types/link-audit'
 import { sql } from 'drizzle-orm'
 import { index, integer, primaryKey, sqliteTable, text } from 'drizzle-orm/sqlite-core'
+import { LINK_AUDIT_ACTIONS } from '../../shared/types/link-audit'
 
 export const links = sqliteTable('links', {
   slug: text().primaryKey(),
@@ -22,6 +24,7 @@ export const links = sqliteTable('links', {
   geo: text({ mode: 'json' }).$type<Link['geo']>(),
   normalizedUrl: text('normalized_url').notNull(),
   effectiveExpiresAt: integer('effective_expires_at'),
+  locked: integer({ mode: 'boolean' }),
 }, table => [
   index('links_created_at_slug_idx').on(table.createdAt, table.slug),
   index('links_created_at_desc_slug_idx').on(sql`${table.createdAt} desc`, table.slug),
@@ -64,4 +67,22 @@ export const linkMigrationRuns = sqliteTable('link_migration_runs', {
     sql`${table.createdAt} desc`,
     sql`${table.id} desc`,
   ),
+])
+
+// Append-only change log. Nothing in the app updates or deletes these rows.
+export const linkAudit = sqliteTable('link_audit', {
+  id: text().primaryKey(),
+  slug: text().notNull(),
+  linkId: text('link_id'),
+  action: text({ enum: LINK_AUDIT_ACTIONS }).notNull(),
+  actor: text().notNull(),
+  authMethod: text('auth_method'),
+  ip: text(),
+  country: text(),
+  reason: text(),
+  changes: text({ mode: 'json' }).$type<LinkAuditChange[]>().notNull(),
+  createdAt: integer('created_at').notNull(),
+}, table => [
+  index('link_audit_slug_created_at_desc_idx').on(table.slug, sql`${table.createdAt} desc`, sql`${table.id} desc`),
+  index('link_audit_created_at_desc_idx').on(sql`${table.createdAt} desc`, sql`${table.id} desc`),
 ])

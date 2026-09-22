@@ -42,6 +42,7 @@ export default eventHandler(async (event) => {
     return { ...buildLinkResponse(event, existingLink), status: 'existing' }
   }
 
+  await assertAllowedDestinations(event, link)
   await hashLinkPasswordForCreate(link)
 
   if (!await createLink(event, link)) {
@@ -50,6 +51,12 @@ export default eventHandler(async (event) => {
       return { ...buildLinkResponse(event, racedLink), status: 'existing' }
     throw createError({ status: 409, statusText: 'Link already exists' })
   }
+  await recordLinkAudit(event, {
+    action: 'create',
+    slug: link.slug,
+    linkId: link.id,
+    changes: diffLinkForAudit(null, link),
+  })
   setResponseStatus(event, 201)
   return { ...buildLinkResponse(event, link), status: 'created' }
 })

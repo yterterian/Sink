@@ -129,6 +129,17 @@
         "title": "刪除 {slug}？",
         "description": "此操作將永久刪除連結，且無法復原。",
         "action": "刪除連結"
+      },
+      "lock": {
+        "title": "鎖定 {slug}？",
+        "description": "鎖定的連結無法編輯或刪除，其短網址也不能重複使用。建議鎖定已印成 QR Code 的連結。",
+        "action": "鎖定連結"
+      },
+      "unlock": {
+        "title": "解鎖 {slug}？",
+        "description": "解鎖後，任何能登入的人都可以變更此連結的目標網址。所有已印刷的 QR Code 都會跟著變更。",
+        "confirm_label": "輸入 {slug} 以確認",
+        "action": "解鎖連結"
       }
     },
     "sort": {
@@ -141,6 +152,33 @@
     "create_failed": "創建連結失敗",
     "ai_slug_failed": "AI 生成短連結失敗",
     "ai_og_failed": "生成 AI OpenGraph 失敗",
-    "ai_og_success": "成功生成 AI OpenGraph"
+    "ai_og_success": "成功生成 AI OpenGraph",
+    "locked": "已鎖定",
+    "locked_hint": "解鎖此連結後才能編輯或刪除",
+    "lock": {
+      "lock": "鎖定連結",
+      "unlock": "解鎖連結",
+      "lock_success": "連結已鎖定",
+      "unlock_success": "連結已解鎖",
+      "failed": "無法變更鎖定狀態"
+    },
+    "history": {
+      "open": "變更紀錄",
+      "title": "{slug} 的變更紀錄",
+      "empty": "尚無變更紀錄。啟用紀錄功能之前的變更不會顯示。",
+      "load_failed": "載入變更紀錄失敗",
+      "load_more": "載入更多",
+      "by": "操作者：{actor}",
+      "no_field_changes": "沒有欄位變更",
+      "actions": {
+        "create": "已建立",
+        "edit": "已編輯",
+        "delete": "已刪除",
+        "lock": "已鎖定",
+        "unlock": "已解鎖",
+        "import": "已匯入",
+        "denied": "變更已被阻擋"
+      }
+    }
   }
 }

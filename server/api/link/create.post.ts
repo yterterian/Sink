@@ -38,6 +38,7 @@ defineRouteMeta({
               unsafe: { type: 'boolean', description: 'Mark link as unsafe, showing a warning page before redirect' },
               geo: { type: 'object', additionalProperties: { type: 'string' }, description: 'Geo-routing rules (country code to URL)' },
               tags: { type: 'array', items: { type: 'string' }, description: 'Up to 10 normalized link tags, each 1-32 characters' },
+              locked: { type: 'boolean', description: 'Create the link already locked against edits and deletion' },
             },
           },
         },
@@ -50,15 +51,32 @@ export default eventHandler(async (event) => {
   const link = await readValidatedBody(event, CreateLinkSchema.parse)
 
   await prepareIncomingLink(event, link)
+  await assertAllowedDestinations(event, link)
 
   await hashLinkPasswordForCreate(link)
 
   if (!await createLink(event, link)) {
+    const existingLink = await getAnyAuthoritativeLink(event, link.slug)
+    if (existingLink?.locked) {
+      await denyLinkChange(event, {
+        slug: link.slug,
+        linkId: existingLink.id,
+        status: 409,
+        reason: 'Slug belongs to a locked link and cannot be reused.',
+        changes: diffLinkForAudit(existingLink, link),
+      })
+    }
     throw createError({
       status: 409,
       statusText: 'Link already exists',
     })
   }
+  await recordLinkAudit(event, {
+    action: 'create',
+    slug: link.slug,
+    linkId: link.id,
+    changes: diffLinkForAudit(null, link),
+  })
   setResponseStatus(event, 201)
   return buildLinkResponse(event, link)
 })

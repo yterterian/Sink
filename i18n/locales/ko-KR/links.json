@@ -129,6 +129,17 @@
         "title": "{slug} 링크를 삭제할까요?",
         "description": "링크가 영구 삭제되며 되돌릴 수 없습니다.",
         "action": "링크 삭제"
+      },
+      "lock": {
+        "title": "{slug}을(를) 잠글까요?",
+        "description": "잠긴 링크는 편집하거나 삭제할 수 없으며 단축 URL을 재사용할 수 없습니다. QR 코드로 인쇄한 링크를 잠그세요.",
+        "action": "링크 잠금"
+      },
+      "unlock": {
+        "title": "{slug}의 잠금을 해제할까요?",
+        "description": "로그인할 수 있는 사람은 누구나 이 링크의 대상을 변경할 수 있게 됩니다. 이미 인쇄된 모든 QR 코드도 변경된 대상을 따릅니다.",
+        "confirm_label": "확인하려면 {slug}을(를) 입력하세요",
+        "action": "링크 잠금 해제"
       }
     },
     "sort": {
@@ -141,6 +152,33 @@
     "create_failed": "링크 생성에 실패했습니다",
     "ai_slug_failed": "AI 슬러그 생성에 실패했습니다",
     "ai_og_failed": "AI OpenGraph 생성에 실패했습니다",
-    "ai_og_success": "AI OpenGraph가 성공적으로 생성되었습니다"
+    "ai_og_success": "AI OpenGraph가 성공적으로 생성되었습니다",
+    "locked": "잠김",
+    "locked_hint": "편집하거나 삭제하려면 링크 잠금을 해제하세요",
+    "lock": {
+      "lock": "링크 잠금",
+      "unlock": "링크 잠금 해제",
+      "lock_success": "링크를 잠갔습니다",
+      "unlock_success": "링크 잠금을 해제했습니다",
+      "failed": "잠금 상태를 변경하지 못했습니다"
+    },
+    "history": {
+      "open": "변경 기록",
+      "title": "{slug} 변경 기록",
+      "empty": "아직 기록된 변경이 없습니다. 기록 기능을 켜기 전의 변경은 표시되지 않습니다.",
+      "load_failed": "변경 기록을 불러오지 못했습니다",
+      "load_more": "더 보기",
+      "by": "{actor}",
+      "no_field_changes": "변경된 필드 없음",
+      "actions": {
+        "create": "생성됨",
+        "edit": "편집됨",
+        "delete": "삭제됨",
+        "lock": "잠김",
+        "unlock": "잠금 해제됨",
+        "import": "가져옴",
+        "denied": "변경 차단됨"
+      }
+    }
   }
 }

@@ -129,6 +129,17 @@
         "title": "Supprimer {slug} ?",
         "description": "Ce lien sera supprimé définitivement. Cette action est irréversible.",
         "action": "Supprimer le lien"
+      },
+      "lock": {
+        "title": "Verrouiller {slug} ?",
+        "description": "Un lien verrouillé ne peut être ni modifié ni supprimé, et son URL courte ne peut pas être réutilisée. Verrouillez les liens imprimés en QR code.",
+        "action": "Verrouiller le lien"
+      },
+      "unlock": {
+        "title": "Déverrouiller {slug} ?",
+        "description": "Toute personne pouvant se connecter pourra changer la destination de ce lien. Tous les QR codes déjà imprimés suivront ce changement.",
+        "confirm_label": "Saisissez {slug} pour confirmer",
+        "action": "Déverrouiller le lien"
       }
     },
     "sort": {
@@ -141,6 +152,33 @@
     "create_failed": "Échec de la création du lien",
     "ai_slug_failed": "Échec de la génération du slug IA",
     "ai_og_failed": "Échec de la génération de l'OpenGraph IA",
-    "ai_og_success": "OpenGraph IA généré avec succès"
+    "ai_og_success": "OpenGraph IA généré avec succès",
+    "locked": "Verrouillé",
+    "locked_hint": "Déverrouillez ce lien pour le modifier ou le supprimer",
+    "lock": {
+      "lock": "Verrouiller le lien",
+      "unlock": "Déverrouiller le lien",
+      "lock_success": "Lien verrouillé",
+      "unlock_success": "Lien déverrouillé",
+      "failed": "Impossible de modifier le verrouillage"
+    },
+    "history": {
+      "open": "Historique des modifications",
+      "title": "Historique des modifications de {slug}",
+      "empty": "Aucune modification enregistrée. Les modifications antérieures à l’activation de l’historique ne sont pas affichées.",
+      "load_failed": "Impossible de charger l’historique des modifications",
+      "load_more": "Charger plus",
+      "by": "par {actor}",
+      "no_field_changes": "Aucun champ modifié",
+      "actions": {
+        "create": "Créé",
+        "edit": "Modifié",
+        "delete": "Supprimé",
+        "lock": "Verrouillé",
+        "unlock": "Déverrouillé",
+        "import": "Importé",
+        "denied": "Modification bloquée"
+      }
+    }
   }
 }

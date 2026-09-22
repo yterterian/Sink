@@ -38,6 +38,14 @@ export default defineNuxtConfig({
     safeBrowsingDoh: '', // Set to DoH URL to enable auto-detection, e.g. https://family.cloudflare-dns.com/dns-query
     webhookUrl: '',
     webhookSecret: '',
+    // Hardening: alerts on link changes, destination allowlist, and who may unlock locked links.
+    changeAlertUrl: '',
+    changeAlertFormat: 'json', // 'json' (signed webhook) or 'ntfy'
+    changeAlertSecret: '', // whsec_... signs JSON alerts
+    changeAlertToken: '', // Optional bearer token sent with every alert
+    destinationAllowlist: '', // Comma-separated hostnames; each also allows its subdomains
+    destinationHttpsOnly: false,
+    unlockAllowedEmails: '', // Comma-separated Cloudflare Access emails allowed to unlock links
     public: {
       previewMode: '',
       slugDefaultLength: '6',

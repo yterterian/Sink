@@ -1,4 +1,5 @@
 import type { ImportResult } from '#shared/schemas/import'
+import type { LinkAuditInput } from '../../utils/link-audit'
 import { ImportDataSchema } from '#shared/schemas/import'
 import { nanoid } from '#shared/schemas/link'
 
@@ -80,6 +81,10 @@ export default eventHandler(async (event) => {
     failedItems: [],
   }
 
+  const destinationPolicy = getDestinationPolicy(event)
+  const auditEntries: LinkAuditInput[] = []
+  let blocked = 0
+
   const chunkSize = 4
   for (let offset = 0; offset < importData.links.length; offset += chunkSize) {
     const chunk = importData.links.slice(offset, offset + chunkSize)
@@ -95,6 +100,17 @@ export default eventHandler(async (event) => {
           slug,
           createdAt: linkData.createdAt ?? now,
           updatedAt: linkData.updatedAt ?? now,
+        }
+        const violation = findDestinationViolation(listLinkDestinations(link), destinationPolicy)
+        if (violation) {
+          blocked++
+          auditEntries.push({
+            action: 'denied',
+            slug,
+            reason: describeDestinationViolation(violation),
+            changes: diffLinkForAudit(null, link),
+          })
+          throw new Error(describeDestinationViolation(violation))
         }
         if (link.password)
           link.password = await normalizeLinkPasswordForStorage(link.password)
@@ -127,9 +143,22 @@ export default eventHandler(async (event) => {
       else {
         result.successItems.push({ index: item.index, slug: item.link.slug, url: item.linkData.url })
         result.success++
+        auditEntries.push({
+          action: 'import',
+          slug: item.link.slug,
+          linkId: item.link.id,
+          changes: diffLinkForAudit(null, item.link),
+        })
       }
     }
   }
+
+  await recordLinkAudits(event, auditEntries, {
+    action: result.success ? 'import' : 'denied',
+    slug: result.successItems[0]?.slug ?? importData.links[0]?.slug ?? '',
+    count: result.success,
+    reason: blocked ? `${blocked} link(s) blocked by the destination policy` : undefined,
+  })
 
   setResponseHeader(event, 'Cache-Control', 'no-store')
 

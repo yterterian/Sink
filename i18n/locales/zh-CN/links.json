@@ -129,6 +129,17 @@
         "title": "删除 {slug}？",
         "description": "此操作将永久删除该链接，且无法撤销。",
         "action": "删除链接"
+      },
+      "lock": {
+        "title": "锁定 {slug}？",
+        "description": "锁定的链接无法编辑或删除，其短链接也不能被重复使用。建议锁定已印成二维码的链接。",
+        "action": "锁定链接"
+      },
+      "unlock": {
+        "title": "解锁 {slug}？",
+        "description": "解锁后，任何能登录的人都可以更改此链接的目标地址。所有已印刷的二维码都会跟随该更改。",
+        "confirm_label": "输入 {slug} 以确认",
+        "action": "解锁链接"
       }
     },
     "sort": {
@@ -141,6 +152,33 @@
     "create_failed": "创建链接失败",
     "ai_slug_failed": "AI 生成短链失败",
     "ai_og_failed": "生成 AI OpenGraph 失败",
-    "ai_og_success": "成功生成 AI OpenGraph"
+    "ai_og_success": "成功生成 AI OpenGraph",
+    "locked": "已锁定",
+    "locked_hint": "解锁此链接后才能编辑或删除",
+    "lock": {
+      "lock": "锁定链接",
+      "unlock": "解锁链接",
+      "lock_success": "链接已锁定",
+      "unlock_success": "链接已解锁",
+      "failed": "无法更改锁定状态"
+    },
+    "history": {
+      "open": "变更记录",
+      "title": "{slug} 的变更记录",
+      "empty": "暂无变更记录。启用记录功能之前的变更不会显示。",
+      "load_failed": "加载变更记录失败",
+      "load_more": "加载更多",
+      "by": "操作人：{actor}",
+      "no_field_changes": "没有字段变更",
+      "actions": {
+        "create": "已创建",
+        "edit": "已编辑",
+        "delete": "已删除",
+        "lock": "已锁定",
+        "unlock": "已解锁",
+        "import": "已导入",
+        "denied": "变更被阻止"
+      }
+    }
   }
 }
