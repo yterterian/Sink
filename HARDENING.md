@@ -17,6 +17,24 @@ short link sends real people somewhere you didn't choose.
 4. **Destination allowlist.** Links (including app-store and per-country
    destinations) can only point at domains you list. HTTPS can be required.
 
+## This deployment
+
+| What        | Where                                                                            |
+| ----------- | -------------------------------------------------------------------------------- |
+| Short links | `https://go.eastrydescouts.org/<slug>`                                           |
+| Dashboard   | `https://go.eastrydescouts.org/dashboard`                                        |
+| API         | `https://go.eastrydescouts.org/api/...`                                          |
+| Cloudflare  | Worker `sink`, custom domain `go.eastrydescouts.org` (zone `eastrydescouts.org`) |
+
+The `workers.dev` and preview URLs are turned off in `wrangler.jsonc`
+(`workers_dev: false`, `preview_urls: false`), so the Worker is reachable only
+through the custom domain. Leave them off: Cloudflare Access protects a
+hostname, so any other address that reaches the Worker would bypass it.
+Without these settings, every deploy turns `workers.dev` back on.
+
+Print QR codes only after the domain is final, since the domain is part of
+every code.
+
 ## Settings
 
 Set these as Worker variables. Mark the secret ones as encrypted.
@@ -41,9 +59,10 @@ printed codes are never cached by phones:
 
 ## Recommended Cloudflare setup
 
-- Put Cloudflare Access in front of **both** `/dashboard` and `/api` (see
-  `docs/configuration/cloudflare-access.md`, "Stricter option"), with a
-  one-time-PIN or Google login and MFA.
+- Put Cloudflare Access in front of **both** `go.eastrydescouts.org/dashboard`
+  and `go.eastrydescouts.org/api` (see `docs/configuration/cloudflare-access.md`,
+  "Stricter option"), with a one-time-PIN or Google login and MFA. Don't cover
+  the whole hostname, or visitors scanning a QR code will hit the login page.
 - Use a long random `NUXT_SITE_TOKEN` and keep it in a password manager.
 - Protect the Cloudflare account itself with a passkey or hardware key. Anyone
   with dashboard or D1 console access can bypass the app, including its

@@ -12,6 +12,9 @@
     "nodejs_compat"
   ],
   "keep_vars": true,
+  // Serve only on the custom domain; stops each deploy re-enabling the workers.dev and preview URLs
+  "workers_dev": false,
+  "preview_urls": false,
   "upload_source_maps": true,
   "observability": {
     "logs": {
