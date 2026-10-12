@@ -1,114 +1,9 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "03fe03c0-5129-4df6-87c1-e24146604f79",
+  "id": "b5961265-c240-49ef-8e57-45a430f8a9d3",
   "prevId": "11db33bb-f67f-4ad5-8d56-327ab58540db",
   "tables": {
-    "link_audit": {
-      "name": "link_audit",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "text",
-          "primaryKey": true,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "slug": {
-          "name": "slug",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "link_id": {
-          "name": "link_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "action": {
-          "name": "action",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "actor": {
-          "name": "actor",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "auth_method": {
-          "name": "auth_method",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "ip": {
-          "name": "ip",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "country": {
-          "name": "country",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "reason": {
-          "name": "reason",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "changes": {
-          "name": "changes",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        }
-      },
-      "indexes": {
-        "link_audit_slug_created_at_desc_idx": {
-          "name": "link_audit_slug_created_at_desc_idx",
-          "columns": [
-            "slug",
-            "\"created_at\" desc",
-            "\"id\" desc"
-          ],
-          "isUnique": false
-        },
-        "link_audit_created_at_desc_idx": {
-          "name": "link_audit_created_at_desc_idx",
-          "columns": [
-            "\"created_at\" desc",
-            "\"id\" desc"
-          ],
-          "isUnique": false
-        }
-      },
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "checkConstraints": {}
-    },
     "link_migration_runs": {
       "name": "link_migration_runs",
       "columns": {
@@ -398,6 +293,13 @@
           "notNull": false,
           "autoincrement": false
         },
+        "proxy": {
+          "name": "proxy",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
         "password": {
           "name": "password",
           "type": "text",
@@ -428,13 +330,6 @@
         },
         "effective_expires_at": {
           "name": "effective_expires_at",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "locked": {
-          "name": "locked",
           "type": "integer",
           "primaryKey": false,
           "notNull": false,
@@ -505,26 +400,6 @@
   },
   "internal": {
     "indexes": {
-      "link_audit_slug_created_at_desc_idx": {
-        "columns": {
-          "\"created_at\" desc": {
-            "isExpression": true
-          },
-          "\"id\" desc": {
-            "isExpression": true
-          }
-        }
-      },
-      "link_audit_created_at_desc_idx": {
-        "columns": {
-          "\"created_at\" desc": {
-            "isExpression": true
-          },
-          "\"id\" desc": {
-            "isExpression": true
-          }
-        }
-      },
       "link_migration_runs_status_updated_at_desc_created_at_desc_id_desc_idx": {
         "columns": {
           "\"updated_at\" desc": {

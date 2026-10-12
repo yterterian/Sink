@@ -16,6 +16,7 @@ const AUDITED_FIELDS = [
   'expiration',
   'cloaking',
   'redirectWithQuery',
+  'proxy',
   'unsafe',
   'locked',
   'comment',

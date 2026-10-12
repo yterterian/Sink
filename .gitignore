@@ -40,3 +40,4 @@ opencode.json
 
 # Local deepwork session state
 .slim/deepwork/
+.pnpm-store/

@@ -20,6 +20,11 @@ describe('diffLinkForAudit', () => {
     expect(diffLinkForAudit(base, { ...base, cloaking: false, comment: '', tags: ['a', 'b'] })).toEqual([])
   })
 
+  it('records changes to reverse proxy behaviour', () => {
+    expect(diffLinkForAudit(base, { ...base, proxy: true }))
+      .toEqual([{ field: 'proxy', to: true }])
+  })
+
   it('never records password hashes', () => {
     const changes = diffLinkForAudit({ ...base, password: 'hash-one' }, { ...base, password: 'hash-two' })
     expect(changes).toEqual([{ field: 'password', from: 'set', to: 'changed' }])

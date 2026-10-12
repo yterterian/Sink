@@ -40,8 +40,15 @@
     {
       "idx": 5,
       "version": "6",
+      "when": 1789995773114,
+      "tag": "0005_tan_karma",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
       "when": 1790078743797,
-      "tag": "0005_living_ultimo",
+      "tag": "0006_living_ultimo",
       "breakpoints": true
     }
   ]
