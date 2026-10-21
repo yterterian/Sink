@@ -1,6 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "sink",
+  "account_id": "21bafaf138d8f2fc4db6ad60bb466e78",
   "main": ".output/server/index.mjs",
   "assets": {
     "binding": "ASSETS",
