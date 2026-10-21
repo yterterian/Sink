@@ -191,7 +191,7 @@ export function writeAccessLog(event: H3Event, accessLogs: LogsMap): void {
   const link = event.context.link || {}
 
   if (process.env.NODE_ENV === 'production') {
-    const analytics = cloudflare.env.ANALYTICS
+    const analytics = cloudflare.env.analytics_engine_sink
     if (!analytics)
       return
 
